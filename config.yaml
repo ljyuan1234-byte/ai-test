@@ -1,0 +1,31 @@
+# ============================================================
+#  项目配置文件
+#  所有可变参数集中在此，代码中通过 config.py 读取
+# ============================================================
+
+# ── 向量数据库 ────────────────────────────────────────────────
+vector_store:
+  persist_dir: "./data/vector_db"
+  # 多语言轻量级嵌入模型（自动下载，~120MB）
+  embedding_model: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  default_collection: "car_news"
+
+# ── LLM 配置（选填，留空则只返回检索结果）────────────────────
+llm:
+  base_url: ""          # 例如 "http://localhost:11434/v1"（Ollama）
+  # api_key 不建议写在文件里，请设置环境变量 LLM_API_KEY
+  api_key_env: "LLM_API_KEY"
+  model: "gpt-4o-mini"  # Ollama 本地可改为 "qwen2:7b" 等
+
+# ── 爬虫默认设置 ─────────────────────────────────────────────
+crawler:
+  default_sources:
+    - autohome
+    - dongchedi
+  max_items: 10
+  fetch_full: false
+  timeout: 15
+
+# ── 日志 ─────────────────────────────────────────────────────
+logging:
+  level: "INFO"         # DEBUG / INFO / WARNING / ERROR
